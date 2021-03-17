@@ -19,31 +19,33 @@ import PrivateRoute from './components/PrivateRoute/PrivateRoute';
 
 export const UserContext = createContext();
 
-function App() {
+function App(props) {
   const [loggedInUser, setLoggedInUser] = useState({});
   return (
-    <UserContext.Provider value ={[loggedInUser, setLoggedInUser]}>
-      <h3>Email : {loggedInUser.email}</h3>
-      <Header></Header>
+    <UserContext.Provider value = {[loggedInUser, setLoggedInUser]}>
+      {/* <h3>email: {loggedInUser.email}</h3> */}
       <Router>
-        <Switch>          
+        <Header></Header>
+        <Switch>
           <Route path="/shop">
-          <Shop></Shop>
+            <Shop></Shop>
           </Route>
           <Route path="/review">
             <Review></Review>
           </Route>
-          <PrivateRoute path ="/inventory">
+          <PrivateRoute path="/inventory">
             <Inventory></Inventory>
           </PrivateRoute>
-          <PrivateRoute path ="/shipment">
-            <Shipment></Shipment>
-          </PrivateRoute>
-          <Route path ="/login">
+          <Route path="/login">
             <Login></Login>
           </Route>
-          <Route exact path="/"><Shop></Shop></Route>
-          <Route path ="/product/:productKey">
+          <PrivateRoute path="/shipment">
+            <Shipment></Shipment>
+          </PrivateRoute>
+          <Route exact path="/">
+            <Shop></Shop>
+          </Route>
+          <Route path="/product/:productKey">
             <ProductDetail></ProductDetail>
           </Route>
           <Route path="*">
