@@ -11,6 +11,8 @@ const Review = () => {
     const [orderPlaced, setOrderPlaced] = useState(false)
     const history = useHistory();
 
+    document.title = "Order Product";
+
     const handleProceedCheckout = () => {
         history.push('/shipment');
     }

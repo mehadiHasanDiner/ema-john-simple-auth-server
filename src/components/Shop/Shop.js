@@ -5,12 +5,15 @@ import Product from '../Product/Product'
 import Cart from '../Cart/Cart';
 import { addToDatabaseCart, getDatabaseCart } from '../../utilities/databaseManager';
 import { Link } from 'react-router-dom';
+import loading from '../../images/loading.gif';
 
 
 const Shop = () => {
     const first10 = fakeData.slice(0, 10);
     const [products, setProduct] = useState(first10);
     const [cart, setCart] = useState([]);
+
+    document.title = "Shop More";
 
     useEffect(() => {
         const savedCart = getDatabaseCart();
@@ -46,6 +49,9 @@ const Shop = () => {
     return (
         <div className="twin-container">
             <div className="product-container">
+                {
+                    products.length === 0 && <p>Loading ...........</p>
+                }                
                 <ul>
                     {
                         products.map(pd => <Product handleAddProduct={handleAddProduct} product={pd} showAddToCart={true} key={products.key}>

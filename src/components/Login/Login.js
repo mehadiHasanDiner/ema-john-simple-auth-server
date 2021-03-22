@@ -14,6 +14,8 @@ function Login() {
     photo: ''
   })
 
+  document.title = "Login";
+
   initializeLoginFramework();
 
   const [loggedInUser, setLoggedInUser] = useContext(UserContext);
@@ -103,7 +105,6 @@ function Login() {
         </div>
       }
 
-      {/* step-1(v-2) {42} */}
       <h1>Our Own Authentication</h1>
       <input type="checkbox" onChange={() => setNewUser(!newUser)} name="newUser" id="" />
       <label htmlFor="newUser">New User Sign up</label>
