@@ -1,5 +1,4 @@
 import React, { useEffect, useState } from 'react';
-import fakeData from '../../fakeData';
 import './Shop.css';
 import Product from '../Product/Product'
 import Cart from '../Cart/Cart';
@@ -9,23 +8,32 @@ import loading from '../../images/loading.gif';
 
 
 const Shop = () => {
-    const first10 = fakeData.slice(0, 10);
-    const [products, setProduct] = useState(first10);
+    // const first10 = fakeData.slice(0, 10);
+    const [products, setProduct] = useState([]);
     const [cart, setCart] = useState([]);
+
+    useEffect(() =>{
+        fetch('http://localhost:5000/products')
+        .then(res => res.json())
+        .then (data => setProduct(data))
+    }, [])
 
     document.title = "Shop More";
 
     useEffect(() => {
         const savedCart = getDatabaseCart();
         const productKeys = Object.keys(savedCart);
-        const previousCart = productKeys.map(existingKey => {
-            const product = fakeData.find(pd => pd.key === existingKey);
-            product.quantity = savedCart[existingKey];
-            // console.log(existingKey, savedCart[existingKey]);
-            return product;
-        })
-        setCart(previousCart);
-    }, [])
+        console.log(products, productKeys)
+        if(products.length > 0){
+            const previousCart = productKeys.map(existingKey => {
+                const product = products.find(pd => pd.key === existingKey);
+                product.quantity = savedCart[existingKey];
+                // console.log(existingKey, savedCart[existingKey]);
+                return product;
+            })
+            setCart(previousCart);
+        }
+    }, [products])
 
     const handleAddProduct = (product) => {
         const toBeAddedKey = product.key;
