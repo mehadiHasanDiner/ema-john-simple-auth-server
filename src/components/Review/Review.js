@@ -25,7 +25,8 @@ const Review = () => {
     useEffect(() => {
         const savedCart = getDatabaseCart();
         const productKeys = Object.keys(savedCart);
-        fetch('', {
+        
+        fetch('http://localhost:5000/productByKeys', {
             method: 'POST',
             headers : {
                 'Content-Type' : 'application/json'
