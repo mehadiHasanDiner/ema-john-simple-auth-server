@@ -6,7 +6,7 @@ const Inventory = () => {
     
     const handleAddProduct = () => {
         const product = {};
-        fetch('http://localhost:5000/addProduct', {
+        fetch('https://powerful-reaches-25389.herokuapp.com/addProduct', {
             method : 'POST',
             headers : {
                 'Content-Type' : 'application/json'
